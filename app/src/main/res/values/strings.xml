@@ -13,7 +13,7 @@
     <string name="btSoma">+</string>
     <string name="btSubtracao">-</string>
     <string name="btMultiplicacao">X</string>
-    <string name="btDivisao">%</string>
+    <string name="btDivisao">/</string>
     <string name="btLimpar">C</string>
     <string name="btPonto">.</string>
     <string name="btResultado">=</string>
