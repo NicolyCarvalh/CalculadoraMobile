@@ -13,7 +13,7 @@
         android:paddingTop="8dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvNumeros"
             android:layout_width="327dp"
             android:layout_height="match_parent"
             android:text="TextView" />
