@@ -13,10 +13,12 @@
         android:paddingTop="8dp">
 
         <TextView
+            android:gravity="center_vertical"
             android:id="@+id/tvNumeros"
             android:layout_width="327dp"
             android:layout_height="match_parent"
-            android:text="TextView" />
+            android:text="0"
+            android:textSize="60sp" />
 
         <Button
             android:id="@+id/btLimpar"

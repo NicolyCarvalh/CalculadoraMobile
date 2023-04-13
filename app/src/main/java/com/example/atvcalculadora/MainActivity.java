@@ -11,8 +11,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView tvNumeros;
     Button btLimpar, btZero, btUm, btDois, btTres, btQuatro, btCinco, btSeis, btSete, btOito, btNove, btPonto, btMultiplicacao, btDivisao, btSubtracao, btSoma, btResultado;
-    double numero = 0;
-    String num1 = " ", num2 = " ", calc="";
+
+    String num1 = " ", num2 = " ", calc="",tela = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +37,113 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btPonto = (Button) findViewById(R.id.btPonto);
         btResultado = (Button) findViewById(R.id.btResultado);
         btLimpar = (Button) findViewById(R.id.btLimpar);
+
+        btZero.setOnClickListener(this);
+        btUm.setOnClickListener(this);
+        btDois.setOnClickListener(this);
+        btTres.setOnClickListener(this);
+        btQuatro.setOnClickListener(this);
+        btCinco.setOnClickListener(this);
+        btSeis.setOnClickListener(this);
+        btSete.setOnClickListener(this);
+        btOito.setOnClickListener(this);
+        btNove.setOnClickListener(this);
+        btLimpar.setOnClickListener(this);
+        btDivisao.setOnClickListener(this);
+        btMultiplicacao.setOnClickListener(this);
+        btSubtracao.setOnClickListener(this);
+        btSoma.setOnClickListener(this);
+        btResultado.setOnClickListener(this);
+        btPonto.setOnClickListener(this);
     }
 
+    void mostrarTela(String tela){
+        tvNumeros.setText(tela);
+    }
     void armazenar (String dado){
         num1 = dado;
+        tela+=num1;
+        tvNumeros.setText(tela);
     }
+
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
             case R.id.btZero:
                 armazenar("0");
-
                 break;
+
             case R.id.btUm:
                 armazenar("1");
                 break;
-        }
+
+            case R.id.btDois:
+                armazenar("2");
+                break;
+
+            case R.id.btTres:
+                armazenar("3");
+                break;
+
+            case R.id.btQuatro:
+                armazenar("4");
+                break;
+
+            case R.id.btCinco:
+                armazenar("5");
+                break;
+
+            case R.id.btSeis:
+                armazenar("6");
+                break;
+
+            case R.id.btSete:
+                armazenar("7");
+                break;
+
+            case R.id.btOito:
+                armazenar("8");
+                break;
+
+            case R.id.btNove:
+                armazenar("9");
+                break;
+
+            case R.id.btLimpar:
+                num1 = "0";
+                tela="0";
+                tvNumeros.setText(tela);
+                break;
+
+            case R.id.btDivisao:
+                tela+="/";
+                mostrarTela(tela);
+                break;
+
+            case R.id.btSubtracao:
+                tela+="/";
+                mostrarTela(tela);
+                break;
+
+            case R.id.btSoma:
+                tela+="/";
+                mostrarTela(tela);
+                break;
+
+            case R.id.btMultiplicar:
+                tela+="/";
+                mostrarTela(tela);
+                break;
+
+            case R.id.btPonto:
+                tela+="/";
+                mostrarTela(tela);
+                break;
     }
+
+
+
+}
 }
