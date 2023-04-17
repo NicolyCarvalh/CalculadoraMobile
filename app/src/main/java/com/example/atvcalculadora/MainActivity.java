@@ -3,6 +3,7 @@ package com.example.atvcalculadora;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btLimpar, btZero, btUm, btDois, btTres, btQuatro, btCinco, btSeis, btSete, btOito, btNove, btMultiplicacao, btDivisao, btSubtracao, btSoma, btResultado;
 
     boolean operacao=false;
-    String num1 = " ", num2 = " ", calc="",tela = "";
+    String calc="",tela = "", num1="", num2="", res="", resultado="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +61,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvNumeros.setText(tela);
     }
     void armazenar (String dado){
+
         if(operacao){
-            num2 += dado;
-            tela=num2;
-            operacao=false;
+            num2 += tvNumeros.getText() + dado;
+            tela = num2;
+            tvNumeros.setText(tela);
+
         } else{
-            num1 += dado;
-            tela=num1;
+            num1 += tvNumeros.getText() + dado;
+            tela = num1;
+            res=num1;
+            tvNumeros.setText(tela);
         }
-        tvNumeros.setText(tela);
+
     }
     @Override
     public void onClick(View v) {
+        tvNumeros.setText("");
 
         switch (v.getId()){
             case R.id.btZero:
@@ -115,68 +121,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btLimpar:
-                num1 = "";
-                num2= "";
+                operacao = false;
+                num1="";
+                num2="";
+                res="";
                 tela="";
-                tvNumeros.setText(tela);
+                resultado="";
+                calc="";
+                armazenar("");
+                mostrarTela(tela);
                 break;
 
             case R.id.btDivisao:
-                tela+="/";
-                mostrarTela(tela);
+                tela="";
                 operacao = true;
                 calc="/";
+                mostrarTela(tela);
                 break;
 
             case R.id.btSubtracao:
-                tela+="-";
-                mostrarTela(tela);
+                tela="";
                 operacao = true;
                 calc="-";
+                mostrarTela(tela);
                 break;
 
             case R.id.btSoma:
-                tela+="+";
-                calc="+";
-
-                mostrarTela(tela);
+                tela="";
                 operacao = true;
+                calc="+";
+                mostrarTela(tela);
                 break;
 
             case R.id.btMultiplicar:
-                tela+="*";
-                mostrarTela(tela);
+                tela="";
                 operacao = true;
                 calc="*";
+                mostrarTela(tela);
                 break;
 
 
             case R.id.btResultado:
                 switch(calc) {
                     case "+":
-                        tela = "" + (Double.parseDouble(num1) + Double.parseDouble(num2));
-                        mostrarTela(tela);
+                        resultado = String.valueOf((Double.parseDouble(res)+Double.parseDouble(num2)));
+                        mostrarTela(resultado);
                         break;
 
                     case "-":
-                        tela = "" + (Double.parseDouble(num1) - Double.parseDouble(num2));
-                        mostrarTela(tela);
+                        resultado = String.valueOf((Double.parseDouble(res)-Double.parseDouble(num2)));
+                        mostrarTela(resultado);
                         break;
 
                     case "*":
-                        tela = "" + (Double.parseDouble(num1) * Double.parseDouble(num2));
-                        mostrarTela(tela);
+                        resultado = String.valueOf((Double.parseDouble(res)*Double.parseDouble(num2)));
+                        mostrarTela(resultado);
                         break;
 
                     case "/":
-                        tela = "" + (Double.parseDouble(num1) / Double.parseDouble(num2));
-                        mostrarTela(tela);
+                        resultado = String.valueOf((Double.parseDouble(res)/Double.parseDouble(num2)));
+                        mostrarTela(resultado);
                         break;
 
                 }
-                num1=tela;
+                num1=resultado;
                 num2="";
-                calc="";
+                res=num1;
+                operacao=true;
                 break;
     }
 
