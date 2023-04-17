@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView tvNumeros;
-    Button btLimpar, btZero, btUm, btDois, btTres, btQuatro, btCinco, btSeis, btSete, btOito, btNove, btPonto, btMultiplicacao, btDivisao, btSubtracao, btSoma, btResultado;
+    Button btLimpar, btZero, btUm, btDois, btTres, btQuatro, btCinco, btSeis, btSete, btOito, btNove, btMultiplicacao, btDivisao, btSubtracao, btSoma, btResultado;
 
     boolean operacao=false;
     String num1 = " ", num2 = " ", calc="",tela = "";
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btDivisao = (Button) findViewById(R.id.btDivisao);
         btSoma = (Button) findViewById(R.id.btSoma);
         btSubtracao = (Button) findViewById(R.id.btSubtracao);
-        btPonto = (Button) findViewById(R.id.btPonto);
         btResultado = (Button) findViewById(R.id.btResultado);
         btLimpar = (Button) findViewById(R.id.btLimpar);
 
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btSubtracao.setOnClickListener(this);
         btSoma.setOnClickListener(this);
         btResultado.setOnClickListener(this);
-        btPonto.setOnClickListener(this);
     }
 
     void mostrarTela(String tela){
@@ -63,12 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     void armazenar (String dado){
         if(operacao){
-            num2 = dado;
-            tela+=num2;
+            num2 += dado;
+            tela=num2;
             operacao=false;
         } else{
             num1 += dado;
-            tela+=num1;
+            tela=num1;
         }
         tvNumeros.setText(tela);
     }
@@ -139,9 +137,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btSoma:
                 tela+="+";
+                calc="+";
+
                 mostrarTela(tela);
                 operacao = true;
-                calc="+";
                 break;
 
             case R.id.btMultiplicar:
@@ -151,13 +150,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 calc="*";
                 break;
 
-            case R.id.btPonto:
-                //num1+=".";
-                tela+=".";
-                tela+=Double.parseDouble(num1);
-                //tela=num1;
-                mostrarTela(tela);
-                break;
 
             case R.id.btResultado:
                 switch(calc) {
