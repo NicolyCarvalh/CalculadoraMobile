@@ -10,8 +10,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView tvNumeros;
-    Button btLimpar, btZero, btUm, btDois, btTres, btQuatro, btCinco, btSeis, btSete, btOito, btNove, btPonto, btMultiplicacao, btDivisao, btSubtracao, btSoma, btResultado;
+    Button btLimpar, btZero, btUm, btDois, btTres, btQuatro, btCinco, btSeis, btSete, btOito, btNove, btMultiplicacao, btDivisao, btSubtracao, btSoma, btResultado;
 
+    boolean operacao=false;
     String num1 = " ", num2 = " ", calc="",tela = "";
 
     @Override
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btDivisao = (Button) findViewById(R.id.btDivisao);
         btSoma = (Button) findViewById(R.id.btSoma);
         btSubtracao = (Button) findViewById(R.id.btSubtracao);
-        btPonto = (Button) findViewById(R.id.btPonto);
         btResultado = (Button) findViewById(R.id.btResultado);
         btLimpar = (Button) findViewById(R.id.btLimpar);
 
@@ -54,19 +54,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btSubtracao.setOnClickListener(this);
         btSoma.setOnClickListener(this);
         btResultado.setOnClickListener(this);
-        btPonto.setOnClickListener(this);
     }
 
     void mostrarTela(String tela){
         tvNumeros.setText(tela);
     }
     void armazenar (String dado){
-        num1 = dado;
-        tela+=num1;
+        if(operacao){
+            num2 += dado;
+            tela=num2;
+            operacao=false;
+        } else{
+            num1 += dado;
+            tela=num1;
+        }
         tvNumeros.setText(tela);
     }
-
-
     @Override
     public void onClick(View v) {
 
@@ -112,34 +115,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btLimpar:
-                num1 = "0";
-                tela="0";
+                num1 = "";
+                num2= "";
+                tela="";
                 tvNumeros.setText(tela);
                 break;
 
             case R.id.btDivisao:
                 tela+="/";
                 mostrarTela(tela);
+                operacao = true;
+                calc="/";
                 break;
 
             case R.id.btSubtracao:
-                tela+="/";
+                tela+="-";
                 mostrarTela(tela);
+                operacao = true;
+                calc="-";
                 break;
 
             case R.id.btSoma:
-                tela+="/";
+                tela+="+";
+                calc="+";
+
                 mostrarTela(tela);
+                operacao = true;
                 break;
 
             case R.id.btMultiplicar:
-                tela+="/";
+                tela+="*";
                 mostrarTela(tela);
+                operacao = true;
+                calc="*";
                 break;
 
-            case R.id.btPonto:
-                tela+="/";
-                mostrarTela(tela);
+
+            case R.id.btResultado:
+                switch(calc) {
+                    case "+":
+                        tela = "" + (Double.parseDouble(num1) + Double.parseDouble(num2));
+                        mostrarTela(tela);
+                        break;
+
+                    case "-":
+                        tela = "" + (Double.parseDouble(num1) - Double.parseDouble(num2));
+                        mostrarTela(tela);
+                        break;
+
+                    case "*":
+                        tela = "" + (Double.parseDouble(num1) * Double.parseDouble(num2));
+                        mostrarTela(tela);
+                        break;
+
+                    case "/":
+                        tela = "" + (Double.parseDouble(num1) / Double.parseDouble(num2));
+                        mostrarTela(tela);
+                        break;
+
+                }
+                num1=tela;
+                num2="";
+                calc="";
                 break;
     }
 
